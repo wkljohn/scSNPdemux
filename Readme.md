@@ -20,9 +20,9 @@ To demultiplex 10X data with known genotype data, run:
 | Parameter | Description | Note |
 | --------- | ----------- | ---- |
 |-b|bam file path||
-|-i|path to 10X matrix folder|where barcodes.tsv.gz, features.tsv.gz, matrix.mtx.gz are|
-|-g|SNP array VCF file|In GRCh38 coordinate|
-|-p|Population SNP VCF file||
+|-i|path to 10X Genomics matrix folder|where barcodes.tsv.gz, features.tsv.gz, matrix.mtx.gz are|
+|-g|SNP array VCF file|using GRCh38 coordinates|
+|-p|population SNP VCF file||
 |-n|number of samples to demultiplex||
 |-o|output path||
 |-t|threads|Default=1|
@@ -37,9 +37,9 @@ The data preparation script depends on:
 R(tested on 4.1), samtools
 
 ### Preparation script
-Test data from 10X can be prepared by the files in the "prep" folder. To initiate download process, please run this:
+Test data from 10X Genomics can be prepared by the files in the "prep" folder. To initiate the download process, please run this:
 ```console
-bash ./prep/input_preparation.sh <output directory> <10X genomics download HTTP hostname>
+bash ./prep/input_preparation.sh <output directory> <10X Genomics download HTTP hostname>
 ```
 
-The resulting merged bam file and merged matrix should be fould in `<output directory>/merged`
+The resulting merged bam file and merged matrix should be found in `<output directory>/merged`
