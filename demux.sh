@@ -36,10 +36,10 @@ function usage {
     echo "usage: $programname [-abch] [-i infile] [-o outfile]"
     echo "=======input files=========="
     echo "  -b      bam file path"
-    echo "  -i      path to 10X matrix folder(barcodes.tsv.gz, features.tsv.gz, matrix.mtx.gz)"
+    echo "  -i      path to 10X Genomics matrix folder (barcodes.tsv.gz, features.tsv.gz, matrix.mtx.gz)"
     echo "=======Other parameters=========="
     echo "  -g      SNP array VCF file"
-    echo "  -p      Population SNP VCF file"
+    echo "  -p      population SNP VCF file"
     echo "  -n      number of samples to demultiplex"
     echo "  -o      output path"
     echo "  -t      threads [Default=1]"
@@ -74,7 +74,7 @@ fi
 #check infile
 if [ -z "$infile" ]
   then
-    echo "Error: No barecode matrix path supplied"
+    echo "Error: No barcode matrix path supplied"
     exit 1
 fi
 
@@ -165,7 +165,6 @@ echo "#######################################################"
 #######################################################
 #  pipeline start
 #######################################################
-#BARCODE=${infile}/barcodes.tsv.gz
 BARCODE=${infile}/barcodes.tsv.gz
 OUT_DIR=${outpath}
 
