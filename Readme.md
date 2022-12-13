@@ -1,6 +1,6 @@
 # scSNPdemux
 
-Demultiplex samples using SNP information and genotype information\
+Bioinformatically demultiplex samples from single cell sequencing using SNP information and genotype information\
 John Wong
 
 # Prerequisites
