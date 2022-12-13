@@ -1,4 +1,4 @@
-library(vcfR)
+library("vcfR")
 
 
 DP=Matrix::readMM("cellSNP.tag.DP.mtx")
@@ -67,8 +67,3 @@ write.vcf(vcffilt,"vcffilt.vcf.gz")
 write.table(GTmtx,"GT_encoded_matrix.tsv",sep="\t",quote=F,row.names=F)
 
 write.table(data.frame(rep("GT",dim(GTmtx)[1])),"GT_col.tsv",sep="\t",quote=F,row.names=F)
-
-#(cat /omics/groups/OE0014/internal/sc_demultiplexing_pipeline/scripts/pipeline/vcfheader2 | grep -v "#CHROM"; paste <(zcat vcffilt.vcf.gz) GT_col.tsv GT_encoded_matrix.tsv) | bgzip -c > vcffilt.withGT.vcf.gz
-#(cat /omics/groups/OE0014/internal/sc_demultiplexing_pipeline/scripts/pipeline/vcfheader2 ;awk 'NR==FNR{a[$1"-"$2]=1;next} $1"-"$2 in a {print $0}' <(zcat /omics/groups/OE0014/internal/brain_mets_breast_lena/results/genotyping_array/bysample/round5_A.vcf.gz) <(zcat vcffilt.withGT.vcf.gz)) | bgzip -c > vcffilt.withGT.arrayonly.vcf.gz
-#mv vcffilt.withGT.* ../df/
-
