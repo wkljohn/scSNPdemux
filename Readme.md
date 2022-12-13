@@ -4,7 +4,7 @@ Bioinformatically demultiplex samples from single cell sequencing using SNP info
 John Wong
 
 # Prerequisites
-`scSNPdemux` requires bcftools(>1.9), cellsnp-lite, vireo, R (>= 4.0.0) and depends on the following R packages: Seurat, ggplot2, reshape2
+`scSNPdemux` requires bcftools(>1.9), cellsnp-lite, vireo, R (>= 4.0.0) and depends on the following R packages: Seurat, ggplot2, reshape2, vcfR
 
 Use this command to create the conda environment for running the pipeline:
 ```
