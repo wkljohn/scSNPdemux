@@ -2,9 +2,9 @@
 options(max.print=2000)
 options(stringsAsFactors=FALSE)
 
-library(Seurat)
-library(reshape2)
-library(ggplot2)
+library("Seurat")
+library("reshape2")
+library("ggplot2")
 args = commandArgs(trailingOnly=TRUE)
 
 if (length(args) < 1){
