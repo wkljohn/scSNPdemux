@@ -1,11 +1,11 @@
 options(max.print=2000)
 options(stringsAsFactors=FALSE)
 
-library(Seurat)
+library("Seurat")
 args = commandArgs(trailingOnly=TRUE)
 
 if (length(args) < 2){
-	print("usage: seurate_get_usable_cellbarcodes.R <10X matrix path> <outpath> <feature cut-off)")
+	print("usage: extract_barcode_by_count.R <10X Genomics matrix path> <outpath> <feature cut-off)")
 }
 scDatapath =  args[1]
 outpath = args[2]
