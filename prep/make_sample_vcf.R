@@ -1,5 +1,11 @@
 library("vcfR")
 
+if (length(args)==0) {
+  stop("barcode argument must be supplied (barcode).csv", call.=FALSE)
+} else if (length(args)==1) {
+  barcode_sample_assignment=read.csv(args[1])
+
+}
 
 DP=Matrix::readMM("cellSNP.tag.DP.mtx")
 AD=Matrix::readMM("cellSNP.tag.AD.mtx")
@@ -11,7 +17,6 @@ vcf <- read.vcfR("cellSNP.base.vcf.gz", verbose = FALSE )
 colnames(DP) = barcodes$V1
 colnames(AD) = barcodes$V1
 colnames(OTH) = barcodes$V1
-barcode_sample_assignment=read.csv("/omics/groups/OE0014/internal/brain_mets_breast_lena/external/10X_example_7_NSCLC_3p/unassigned/20k_NSCLC_DTC_3p_nextgem_intron_Multiplex_multiplexing_analysis_tag_calls_per_cell.csv")
 
 #subset informative barcodes
 #barcodes_valid = which(barcodes$V1 %in% barcode_sample_assignment$cell_barcode)
