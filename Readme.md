@@ -42,4 +42,12 @@ Test data from 10X Genomics can be prepared by the files in the "prep" folder. T
 bash ./prep/input_preparation.sh <output directory> <10X Genomics download HTTP hostname>
 ```
 
+###1000G SNP VCF
+```
+# hg38
+wget https://sourceforge.net/projects/cellsnp/files/SNPlist/genome1K.phase3.SNP_AF5e2.chr1toX.hg38.vcf.gz
+# hg19
+wget https://sourceforge.net/projects/cellsnp/files/SNPlist/genome1K.phase3.SNP_AF5e2.chr1toX.hg19.vcf.gz
+```
+
 The resulting merged bam file and merged matrix should be found in `<output directory>/merged`
