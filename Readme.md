@@ -42,7 +42,7 @@ Test data from 10X Genomics can be prepared by the files in the "prep" folder. T
 bash ./prep/input_preparation.sh <output directory> <10X Genomics download HTTP hostname>
 ```
 
-###1000G SNP VCF
+### 1000G SNP VCF
 ```
 # hg38
 wget https://sourceforge.net/projects/cellsnp/files/SNPlist/genome1K.phase3.SNP_AF5e2.chr1toX.hg38.vcf.gz
