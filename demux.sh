@@ -113,7 +113,7 @@ if [ -z "$threads" ]
 fi
 
 #check nsamples
-if [ -z "$nsamples" && -z "$snpfile" ]
+if [ -z "$nsamples" ] && [ -z "$snpfile" ]
   then
     echo "Error: No N-samples supplied"
     exit 1
