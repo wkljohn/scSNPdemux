@@ -9,8 +9,12 @@ John Wong
 Use this command to create the conda environment for running the pipeline:
 ```
 conda create -n demuxEnvironment -c bioconda cellsnp-lite bcftools samtools
+conda install -n demuxEnvironment r-base=4.2.2  r-essentials
+conda install -n demuxEnvironment -c conda-forge r-seurat
+conda install -n demuxEnvironment -c conda-forge r-ggplot2 r-matrix r-reshape2 r-vcfr
 conda activate demuxEnvironment
 pip install -U vireoSNP
+
 ```
 
 # Usage
