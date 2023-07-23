@@ -79,11 +79,11 @@ if [ -z "$infile" ]
 fi
 
 #check snpfile
-if [ -z "$snpfile" ]
-  then
-    echo "Error: No snpfile supplied"
-    exit 1
-fi
+#if [ -z "$snpfile" ]
+#  then
+#    echo "Error: No snpfile supplied"
+#    exit 1
+#fi
 
 #check popsnpfile
 if [ -z "$popsnpfile" ]
@@ -203,24 +203,30 @@ cellsnp-lite -s $bamfile -b ${outpath}/barcodes.tsv -O ${outpath}/cellsnp -R $po
 #vireo -c $outpath/cellsnp  -p $threads --randSeed=2 --outDir=$outpath/vireo_2 -d $snpfile -t GT --forceLearnGT --noPlot
 
 
-#MODE 3, expand snp scope
-echo "merging input vcf and sc vcf"
-bcftools reheader -h $SCRIPTPATH/vcfheader $outpath/cellsnp/cellSNP.base.vcf.gz | zcat | fgrep -v "AD=0;" | bgzip -c > $outpath/cellsnp/cellSNP.base.rehead.vcf.gz
-
-bcftools sort -O z -o $outpath/cellsnp/cellSNP.base.rehead.sorted.vcf.gz $outpath/cellsnp/cellSNP.base.rehead.vcf.gz
-
-bcftools index -t -f $outpath/cellsnp/cellSNP.base.rehead.sorted.vcf.gz
-
-bcftools index -t $snpfile
-
-bcftools merge -O z -o $outpath/cellsnp/merged.vcf.gz $snpfile $outpath/cellsnp/cellSNP.base.rehead.sorted.vcf.gz
-
-gunzip $outpath/cellsnp/merged.vcf.gz
-awk -v OFS="\t" '{if ($9 == "."){$9 = "GT";}; print $0}' $outpath/cellsnp/merged.vcf | bgzip -c > $outpath/cellsnp/merged.vcf.gz
-rm $outpath/cellsnp/merged.vcf
-
-echo "Running vireo"
-vireo -c $outpath/cellsnp -p $threads --randSeed=1 --outDir=$outpath/vireo_1 -d $outpath/cellsnp/merged.vcf.gz -t GT --forceLearnGT #--noPlot
+if [ -z "$snpfile" ];
+then
+	echo "Running vireo without genotypes"
+	vireo -c $outpath/cellsnp -p $threads --randSeed=1 --outDir=$outpath/vireo_1 -t GT -N $nsamples
+else
+	#MODE 3, expand snp scope
+	echo "merging input vcf and sc vcf"
+	bcftools reheader -h $SCRIPTPATH/vcfheader $outpath/cellsnp/cellSNP.base.vcf.gz | zcat | fgrep -v "AD=0;" | bgzip -c > $outpath/cellsnp/cellSNP.base.rehead.vcf.gz
+	
+	bcftools sort -O z -o $outpath/cellsnp/cellSNP.base.rehead.sorted.vcf.gz $outpath/cellsnp/cellSNP.base.rehead.vcf.gz
+	
+	bcftools index -t -f $outpath/cellsnp/cellSNP.base.rehead.sorted.vcf.gz
+	
+	bcftools index -t $snpfile
+	
+	bcftools merge -O z -o $outpath/cellsnp/merged.vcf.gz $snpfile $outpath/cellsnp/cellSNP.base.rehead.sorted.vcf.gz
+	
+	gunzip $outpath/cellsnp/merged.vcf.gz
+	awk -v OFS="\t" '{if ($9 == "."){$9 = "GT";}; print $0}' $outpath/cellsnp/merged.vcf | bgzip -c > $outpath/cellsnp/merged.vcf.gz
+	rm $outpath/cellsnp/merged.vcf
+	
+	echo "Running vireo"
+	vireo -c $outpath/cellsnp -p $threads --randSeed=1 --outDir=$outpath/vireo_1 -d $outpath/cellsnp/merged.vcf.gz -t GT --forceLearnGT #--noPlot
+fi
 
 #####################################
 #Finalize results
